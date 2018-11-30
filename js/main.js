@@ -6,6 +6,7 @@ $(document).ready(function() {
     registerBestfit();
     registerFirstfit();
     registerNextfit();
+    registerCompaction();
 });
 
 function registerFirstfit()
@@ -39,6 +40,17 @@ function registerBestfit()
     };
     $('#bestfit').find('.btn-danger')[0].onclick = function() {
         bf = new Bestfit(getRandomVariables());
+    };
+}
+
+function registerCompaction()
+{
+    var comp = new Compaction(getRandomVariables());
+    $('#compaction').find('.btn-success')[0].onclick = function() {
+        comp.addBlock();
+    };
+    $('#compaction').find('.btn-danger')[0].onclick = function() {
+        comp = new Compaction(getRandomVariables());
     };
 }
 
@@ -82,4 +94,9 @@ function sortNumber(a, b)
 function sortArr(a, b)
 {
     return a[0] - b[0];
+}
+
+function compactArr(a, b)
+{
+    return a[1] - b[1];
 }

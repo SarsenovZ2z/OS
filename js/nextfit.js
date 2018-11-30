@@ -20,11 +20,17 @@ class Nextfit {
         if (this.blockField.reportValidity()) {
             var size = this.blockField.value;
 
-            for (var i=this.lastIteration, prev=0;i<this.data.length;++i)
+            for (var i=this.lastIteration, prev=this.lastIteration?this.data[this.lastIteration-1][0]:0;i<this.data.length;++i)
             {
                 if (this.data[i][1]==1 && this.data[i][0]-prev>=size)
                 {
-                    
+                    if (this.data[i][0]-prev==size)
+                    {
+                        this.data.splice(i, 1);
+                    }
+                    this.data.push([prev+1*size, 2]);
+                    this.data.sort(sortArr);
+                    this.lastIteration = i+2;
                     addMessage("nextfit", "OK");
                     this.updateSpaces();
                     this.render();
@@ -33,19 +39,23 @@ class Nextfit {
                 prev = this.data[i][0];
             }
 
-
-                    var old = freeBlocks[i][1]?this.data[freeBlocks[i][1]-1][0]:0;
-                    if (freeBlocks[i][0]==size)
+            for (var i=0, prev=0;i<this.lastIteration;++i)
+            {
+                if (this.data[i][1]==1 && this.data[i][0]-prev>=size)
+                {
+                    if (this.data[i][0]-prev==size)
                     {
-                        this.data.splice(freeBlocks[i][1], 1);
+                        this.data.splice(i, 1);
                     }
-                    this.data.push([old+1*size, 2]);
+                    this.data.push([prev+1*size, 2]);
                     this.data.sort(sortArr);
+                    this.lastIteration = i+2;
                     addMessage("nextfit", "OK");
                     this.updateSpaces();
                     this.render();
                     return;
                 }
+                prev = this.data[i][0];
             }
             addMessage("nextfit", "Failed");
         }
@@ -53,7 +63,6 @@ class Nextfit {
 
 
     render() {
-        console.log(this.data);
         this.ctx.clearRect(0, 0, width, height);
         for(var i=0, prev=0, prevInd=0; i<this.data.length; ++i)
         {

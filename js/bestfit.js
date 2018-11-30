@@ -52,7 +52,6 @@ class Bestfit {
 
 
     render() {
-        console.log(this.data);
         this.ctx.clearRect(0, 0, width, height);
         for(var i=0, prev=0, prevInd=0; i<this.data.length; ++i)
         {

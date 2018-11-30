@@ -17,34 +17,24 @@ class Firstfit {
 
     addBlock() {
         if (this.blockField.reportValidity()) {
-            var size = this.blockField.value,
-                freeBlocks = [];
+            var size = this.blockField.value;
 
             for (var i=0, prev=0;i<this.data.length;++i)
             {
-                if (this.data[i][1]==1)
+                if (this.data[i][1]==1 && this.data[i][0]-prev>=size)
                 {
-                    freeBlocks.push([this.data[i][0]-prev, i]);
-                }
-                prev = this.data[i][0];
-            }
-            freeBlocks.sort(sortArr);
-            for(var i=0;i<freeBlocks.length;++i)
-            {
-                if (freeBlocks[i][0]>=size)
-                {
-                    var old = freeBlocks[i][1]?this.data[freeBlocks[i][1]-1][0]:0;
-                    if (freeBlocks[i][0]==size)
+                    if (this.data[i][0]-prev==size)
                     {
-                        this.data.splice(freeBlocks[i][1], 1);
+                        this.data.splice(i, 1);
                     }
-                    this.data.push([old+1*size, 2]);
+                    this.data.push([prev+1*size, 2]);
                     this.data.sort(sortArr);
                     addMessage("firstfit", "OK");
                     this.updateSpaces();
                     this.render();
                     return;
                 }
+                prev = this.data[i][0];
             }
             addMessage("firstfit", "Failed");
         }
@@ -52,7 +42,6 @@ class Firstfit {
 
 
     render() {
-        console.log(this.data);
         this.ctx.clearRect(0, 0, width, height);
         for(var i=0, prev=0, prevInd=0; i<this.data.length; ++i)
         {
