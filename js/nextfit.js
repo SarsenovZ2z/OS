@@ -30,8 +30,8 @@ class Nextfit {
                     }
                     this.data.push([prev+1*size, 2]);
                     this.data.sort(sortArr);
+                    addMessage("nextfit", "Start: " + this.data[this.lastIteration][0] + "KB,<br/>Finish: " + this.data[i][0] + "KB");
                     this.lastIteration = i+2;
-                    addMessage("nextfit", "OK");
                     this.updateSpaces();
                     this.render();
                     return;
@@ -49,8 +49,8 @@ class Nextfit {
                     }
                     this.data.push([prev+1*size, 2]);
                     this.data.sort(sortArr);
+                    addMessage("nextfit", "Start: " + this.data[this.lastIteration][0] + "KB,<br/>Finish: " + this.data[i][0] + "KB");
                     this.lastIteration = i+2;
-                    addMessage("nextfit", "OK");
                     this.updateSpaces();
                     this.render();
                     return;

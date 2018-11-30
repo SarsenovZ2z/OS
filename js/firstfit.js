@@ -21,15 +21,16 @@ class Firstfit {
 
             for (var i=0, prev=0;i<this.data.length;++i)
             {
-                if (this.data[i][1]==1 && this.data[i][0]-prev>=size)
+                var old = this.data[i][0]-prev;
+                if (this.data[i][1]==1 && old>=size)
                 {
-                    if (this.data[i][0]-prev==size)
+                    if (old==size)
                     {
                         this.data.splice(i, 1);
                     }
                     this.data.push([prev+1*size, 2]);
                     this.data.sort(sortArr);
-                    addMessage("firstfit", "OK");
+                    addMessage("firstfit", "First suitable free partition is " + old);
                     this.updateSpaces();
                     this.render();
                     return;

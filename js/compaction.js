@@ -77,32 +77,6 @@ class Compaction {
 
 
         return;
-        for(var i=0, prev=0, prevInd=0; i<this.data.length; ++i)
-        {
-            this.ctx.beginPath();
-            this.ctx.fillStyle = this.data[i][1]==1?"#007bff":this.data[i][1]==0?"#ffa500":"#e83e8c";
-            this.ctx.fillRect(prev, 0, this.data[i][0], heightOfBlock);
-
-
-
-
-            if (this.data[i][1]==1)
-            {
-                this.ctx.beginPath();
-                this.ctx.fillStyle = "#007b5e";
-                this.ctx.textAlign="center";
-                this.ctx.font = "18px Arial";
-                this.ctx.fillText(this.data[i][0]-prev+"KB", this.data[i][0]-(this.data[i][0]-prev)/2, heightOfBlock+30);
-            }
-            else if (this.data[i][1]==2 && prevInd == 2)
-            {
-                this.ctx.beginPath();
-                this.ctx.fillStyle = "#fff";
-                this.ctx.fillRect(prev-1, 0, 2, heightOfBlock);
-            }
-            prevInd = this.data[i][1];
-            prev = this.data[i][0];
-        }
     }
 
     updateSpaces() {

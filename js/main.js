@@ -1,6 +1,6 @@
 const heightOfBlock = 80;
 const width = 1024;
-const height = 300;
+const height = 400;
 
 $(document).ready(function() {
     registerBestfit();

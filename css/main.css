@@ -71,5 +71,5 @@ footer {
 }
 .message {
     font-weight: bold;
-    opacity: 0;
+    /* opacity: 0; */
 }
